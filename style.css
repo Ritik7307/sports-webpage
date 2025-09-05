@@ -1,0 +1,162 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+/* ===main body=== */
+.header {
+      margin-top: 70px; /* offset for fixed header */
+      background: #283849;
+      color: wheat;
+      
+    }
+  
+    .nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1rem;
+      margin: 0;
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .nav a:hover {
+      color: #ffcc66;
+    }
+/* sports section */
+/* ===== Sports Section ===== */
+.sports {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+.sports h1 {
+  color: #004080;
+  margin-bottom: 2rem;
+}
+
+/* Grid for sports */
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual sport card */
+.sport-card {
+  background: #f4f4f4;
+  padding: 2rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background 0.3s;
+  cursor: pointer;
+}
+.sport-card:hover {
+  transform: translateY(-5px);
+  background: #e6f0ff;
+}
+
+
+/* ===== College Header ===== */
+    .college-header {
+      background: #004080;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      text-align: center;
+      padding: 5px 0;
+    }
+    .college-header .header-img {
+      max-width: 100%;
+      height: auto;
+    }
+    .rgipt-footer {
+    background: #003366;
+    color: #ddd;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+  }
+
+  .rgipt-footer a {
+    color: #ffcc66;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .rgipt-footer a:hover {
+    color: white;
+  }
+
+  /* Links Grid */
+  .footer-links {
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer-links ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+    list-style: none;
+  }
+  .footer-links li {
+    padding: 5px 0;
+  }
+
+  /* Meta Info */
+  .footer-meta {
+    background: #00264d;
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+  .footer-meta .visitor {
+    float: right;
+    margin-right: 1rem;
+  }
+  
+
+  /* Bottom Section */
+  .footer-bottom {
+    background: #001933;
+    text-align: center;
+    padding: 1rem;
+  }
+  .footer-bottom ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+  }
+  .footer-bottom ul li {
+    display: inline-block;
+    margin: 0 8px;
+  }
+  .footer-bottom hr {
+    border: 0;
+    height: 1px;
+    background: #555;
+    margin: 10px auto;
+    width: 90%;
+  }
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+    @media (max-width: 768px) {
+      .event {
+        flex-direction: column;
+      }
+      .event img, .event-content {
+        width: 100%;
+      }
+    }
