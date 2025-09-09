@@ -1,113 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports-Council</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGIPT Sports Council</title>
+<style>
+/* General Reset */
+* {margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
+html {scroll-behavior: smooth;}
+body {line-height:1.6; background:#fff; color:#333; text-align:center;}
+
+/* Navbar */
+nav {
+  position: fixed; top:0; width:100%; background:#222; color:#fff; padding:15px 0; z-index:1000;
+}
+nav ul {display:flex; justify-content:center; list-style:none;}
+nav ul li {margin:0 20px;}
+nav ul li a {color:#fff; text-decoration:none; font-size:18px; transition:0.3s;}
+nav ul li a:hover {color:#ffcc00;}
+
+/* Hero image */
+.hero {
+  margin-top:70px; width:100%; height:400px;
+  background:url('https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80') no-repeat center center/cover;
+  display:flex; justify-content:center; align-items:center;
+  color:white; font-size:40px; font-weight:bold; text-shadow:2px 2px 5px black;
+}
+
+/* About Section */
+.about {
+  padding:50px; background:#f4f4f4; text-align:center;
+}
+.about h2 {margin-bottom:20px; font-size:32px; color:#333;}
+.about p {font-size:18px; max-width:800px; margin:auto; color:#555;}
+
+/* Sports Section */
+.sports {padding:50px; background:#fff;}
+.sports h2 {margin-bottom:30px; font-size:32px; color:#333;}
+.sports-carousel {overflow: hidden; width: 100%; padding: 20px 0; position: relative;}
+.sports-track {display: flex; gap: 20px; transition: transform 0.5s ease-in-out;}
+.sport-box {
+  flex: 0 0 30%; max-width: 30%; height: 300px; 
+  position: relative; cursor: pointer; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.5s;
+}
+.sport-box img {
+  width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;
+}
+.sport-box:hover img {transform: scale(1.1);}
+.sport-info {
+  position: absolute; top:0; left:100%; width:100%; height:100%;
+  background: rgba(0,0,0,0.8); color: #fff; padding: 20px; text-align:center;
+  transition: 0.5s ease;
+}
+.sport-box:hover .sport-info {left:0;}
+.sport-info h3 {margin-bottom:10px;}
+
+/* Events Section */
+.events {padding: 50px; background: #f4f4f4;}
+.events h2 {margin-bottom: 30px; font-size: 32px; color: #333;}
+.events-container {display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;}
+.event-box {flex: 1 1 300px; background: #fff; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); padding: 20px; transition: transform 0.3s ease;}
+.event-box:hover {transform: translateY(-10px);}
+.event-box h3 {margin-bottom: 10px; color: #444;}
+
+/* Energia Section */
+.energia-section {padding: 60px; background: #fff; text-align: center;}
+.energia-section h2 {font-size: 32px; margin-bottom: 30px; color: #333;}
+.energia-container {display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;}
+.energia-slider {position: relative; width: 400px; height: 250px; overflow: hidden; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+.slides {display: flex; width: 100%; height: 100%; animation: slide 12s infinite;}
+.slides img {width: 400px; height: 250px; object-fit: cover; transition: transform 0.5s;}
+.slides img:hover {transform: scale(1.1);}
+@keyframes slide {0% { transform: translateX(0); } 25% { transform: translateX(0); } 35% { transform: translateX(-400px); } 60% { transform: translateX(-400px); } 70% { transform: translateX(-800px); } 95% { transform: translateX(-800px); } 100% { transform: translateX(0); }}
+.energia-details {max-width: 500px; text-align: left;}
+.energia-details p {font-size: 16px; line-height: 1.6; margin-bottom: 20px;}
+.energia-details ul {list-style: disc; margin-left: 20px; line-height: 1.8; color: #444;}
+
+/* Core Team Section */
+.core-team {padding: 50px; background: #f9f9f9;}
+.core-team h2 {color: #800000; text-align: center; margin-bottom: 40px;}
+.team-container {display: flex; flex-direction: column; align-items: center; gap: 40px; max-width: 1200px; margin: auto;}
+.row {display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;}
+.member {width: 160px; text-align: center;}
+.member img {width: 140px; height: 140px; object-fit: cover; border-radius: 50%; border: 4px solid #800000; margin-bottom: 10px; transition: transform 0.5s;}
+.member img:hover {transform: scale(1.1);}
+.name {font-weight: bold; font-size: 16px;}
+.role {font-size: 14px; color: #555;}
+
+/* Back to Top Button */
+#topBtn {position: fixed; bottom: 40px; right: 40px; z-index: 999; font-size: 18px; background: #004080; color: white; padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; display: none;}
+#topBtn:hover {background: #002050;}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .energia-container {flex-direction: column;}
+  .slides img, .energia-slider {width: 100%; height: auto;}
+  .sport-box, .event-box, .member {flex:1 1 200px;}
+}
+</style>
 </head>
 <body>
-    <!-- ===== College Header ===== -->
-  <div class="college-header">
-    <a href="https://rgipt.ac.in/">
-      <!-- <img src="logo.png.jpg" alt="RGIPT Header" class="header-img"> -->
-    </a>
-  </div>
 
-  <!-- ===Main Body=== -->
-   <div class="header">
-    <nav class="nav">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#sports">Sports</a></li>
-        <li><a href="#achievement">Achievements</a></li>
-        <li><a href="#sport-fest">Sports-Fest</a></li>
-        <li><a href="#core-team">Core Team</a></li>
-      </ul>
-    </nav>
-   </div>
-   <img src="/images/1.jpg" alt="" width="100%" height="300px">
-  <section id="sports" class="sports">
-  <h1>Sports</h1>
-  <div class="sports-grid">
-    <div class="sport-card"> Football</div>
-    <div class="sport-card">Cricket</div>
-    <div class="sport-card">Volleyball</div>
-    <div class="sport-card"> Basketball</div>
-    <div class="sport-card"> Table Tennis</div>
-    <div class="sport-card"> Carrom</div>
-    <div class="sport-card"> Chess</div>
-    <div class="sport-card"> Badminton</div>
+<!-- Navbar -->
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#sports">Sports</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#core-team">Core Team</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">RGIPT Sports Council</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <h2>About RGIPT Sports Council</h2>
+  <p>The RGIPT Sports Council is the backbone of all sporting activities at Rajiv Gandhi Institute of Petroleum Technology. 
+     It promotes a culture of fitness, sportsmanship, and teamwork by organizing events, tournaments, and training sessions. 
+     The council manages both indoor and outdoor sports, encouraging students to excel in football, basketball, cricket, badminton, volleyball, 
+     lawn tennis, athletics, as well as indoor games like carrom, chess, and table tennis. 
+     With a vision to build leadership and sports spirit, the council is dedicated to fostering talent and unity among students.</p>
+</section>
+
+<!-- Sports -->
+<section class="sports" id="sports">
+  <h2>Our Sports</h2>
+  <div class="sports-carousel">
+    <div class="sports-track">
+      <div class="sport-box">
+        <img src="/images/football.jpg" alt="Football">
+        <div class="sport-info"><h3>Football</h3><p>The most loved outdoor sport at RGIPT.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/basketball.jpg" alt="Basketball">
+        <div class="sport-info"><h3>Basketball</h3><p>High-energy matches that bring the crowd alive.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/cricket.jpg" alt="Cricket">
+        <div class="sport-info"><h3>Cricket</h3><p>Passion that unites us all.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/badminton.jpg" alt="Badminton">
+        <div class="sport-info"><h3>Badminton</h3><p>Fast-paced indoor excitement.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/volleyball.jpg" alt="Volleyball">
+        <div class="sport-info"><h3>Volleyball</h3><p>Team coordination and fun.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/lawn-tennis.jpg" alt="Lawn Tennis">
+        <div class="sport-info"><h3>Lawn Tennis</h3><p>Precision and agility game.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/carrom.jpg" alt="Carrom">
+        <div class="sport-info"><h3>Carrom</h3><p>Indoor strategy and skill.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/chess.jpg" alt="Chess">
+        <div class="sport-info"><h3>Chess</h3><p>Mind sport, strategy-focused.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/gymnasium.jpg" alt="Gymnasium">
+        <div class="sport-info"><h3>Gymnasium</h3><p>Fitness and strength training.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/kabaddi.jpg" alt="Kabaddi">
+        <div class="sport-info"><h3>Kabaddi</h3><p>Traditional high-energy sport.</p></div>
+      </div>
+      <div class="sport-box">
+        <img src="/images/kho-kho.jpg" alt="Kho-Kho">
+        <div class="sport-info"><h3>Kho-Kho</h3><p>Agility and teamwork.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
-
-
-
-  <footer class="rgipt-footer">
-
-  <!-- Quick Links -->
-  <div class="footer-links">
-    <ul>
-      <li><a href="./en/page/annual-reports">Annual Reports</a></li>
-      <li><a href="./en/page/institute-policies">Institute Policies</a></li>
-      <li><a href="./en/page/committee1">Committees</a></li>
-      <li><a href="./en/page/contact-us1">Contact Us</a></li>
-      <li><a href="faculty/Faculty/FacultyProfilelistnew?typeid=1&amp;mode=on" target="_blank">Faculty Search</a></li>
-      <li><a href="https://gem.gov.in/" target="_blank">Government e-Market</a></li>
-      <li><a href="./en/page/grievance-cell">Grievance Cell</a></li>
-      <li><a href="./en/page/immovable-property-returns">Immovable Property Return</a></li>
-      <li><a href="./en/page/downloads-forms">Miscellaneous Downloads</a></li>
-      <li><a href="./en/page/nirf2024">NIRF</a></li>
-      <li><a href="./en/page/newsletter-posters1">RGIPT Newsletter</a></li>
-      <li><a href="./en/page/nptel-cec-teqip">NPTEL/CEC/TEQIP</a></li>
-      <li><a href="./en/page/reach-us">Reach Us</a></li>
-      <li><a href="./en/page/rti">Right to Information</a></li>
-      <li><a href="./en/page/rajbhasha">Rajbhasha</a></li>
-      <li><a href="./en/page/minutes-of-meetings">Minutes of Meetings</a></li>
-      <li><a href="./en/page/repository">Repository</a></li>
-      <li><a href="./en/page/facilities1">Services</a></li>
-      <li><a href="https://rgipt.ac.in/rgipt-samarthegov/" target="_blank">Samarth eGov</a></li>
-      <li><a href="https://rgipt.euniwizarde.com/" target="_blank">E-Tenders</a></li>
-      <li><a href="pdf/Directory-RGIPT_062023.pdf" target="_blank">Telephone Directory</a></li>
-      <li><a href="./en/page/tenders">Tender</a></li>
-      <li><a href="https://mail.google.com/" target="_blank">Webmail</a></li>
-      <li><a href="./en/page/women-cell">Women Cell (ICC)</a></li>
-      <li><a href="./en/page/important-links">Important Links</a></li>
-      <li><a href="./en/page/news-and-media">News and Media</a></li>
-      <li><a href="./en/page/rgipt-press">RGIPT in Press</a></li>
-      <li><a href="./en/page/rgipt-photo-gallery">Photo Gallery</a></li>
-      <li><a href="./en/page/video-gallery">Video Gallery</a></li>
-    </ul>
+<!-- Events -->
+<section class="events" id="events">
+  <h2>Our Events</h2>
+  <div class="events-container">
+    <div class="event-box">
+      <h3>Kridotsav</h3>
+      <p>[Details about Kridotsav will go here]</p>
+    </div>
+    <div class="event-box">
+      <h3>National Sports Day</h3>
+      <p>[Details about National Sports Day will go here]</p>
+    </div>
   </div>
+</section>
 
-  <!-- Update & Visitor Info -->
-  <div class="footer-meta">
-    <p>
-      Page Last Updated : Wednesday, 20 August 2025 | 07:20 PM
-      <span class="visitor">
-        Visitor No. : 
-        <img src="https://c.statcounter.com/12237467/0/05b52df0/0/" alt="Visitor Counter">
-      </span>
-    </p>
+<!-- Energia -->
+<section class="energia-section" id="energia">
+  <h2>Annual Sports Fest – Energia</h2>
+  <div class="energia-container">
+    <div class="energia-slider">
+      <div class="slides">
+        <img src="https://images.unsplash.com/photo-1600962815726-457c4a344f83?auto=format&fit=crop&w=800&q=80" alt="Energia 1">
+        <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80" alt="Energia 2">
+        <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=800&q=80" alt="Energia 3">
+      </div>
+    </div>
+    <div class="energia-details">
+      <p><strong>Energia</strong> is the flagship annual sports fest of RGIPT. It brings together athletes and enthusiasts from across institutes for a vibrant celebration of sportsmanship, competition, and unity.</p>
+      <ul>
+        <li>Participation from colleges across India</li>
+        <li>Wide range of indoor and outdoor sports</li>
+        <li>High-energy opening and closing ceremonies</li>
+        <li>Promotes sportsmanship, discipline, and fitness</li>
+      </ul>
+    </div>
   </div>
+</section>
 
-  <!-- Policy Links & Copyright -->
-  <div class="footer-bottom">
-    <ul>
-      <li><a href="./en/page/disclaimer">Disclaimer</a></li>
-      <li><a href="./en/page/terms-conditions">Terms & Conditions</a></li>
-      <li><a href="./en/page/privacy-policy">Privacy Policy</a></li>
-      <li><a href="./en/page/hyperlinking-policy">Hyperlinking Policy</a></li>
-      <li><a href="./en/page/copyright-policy">Copyright Policy</a></li>
-      <li><a href="./en/page/web-information-manager">Web Information Manager</a></li>
-      <li><a href="./en/page/help">Help</a></li>
-      <li><a href="en/feedback">Feedback</a></li>
-    </ul>
-    <hr>
-    <p>Copyright © 2020, All Rights Reserved, Rajiv Gandhi Institute of Petroleum Technology, Jais, Amethi</p>
+<!-- Core Team -->
+<section class="core-team" id="core-team">
+  <h2>Sports Council Core Team</h2>
+  <div class="team-container">
+
+    <!-- Top (Secretary) -->
+    <div class="row">
+      <div class="member">
+        <img src="secretary.jpg" alt="Secretary">
+        <div class="name">Mr. Anil Kumar</div>
+        <div class="role">Secretary</div>
+      </div>
+    </div>
+
+    <!-- Joint Secretaries -->
+    <div class="row">
+      <div class="member">
+        <img src="joint1.jpg" alt="Joint Secretary">
+        <div class="name">Ms. Kajal Rawat</div>
+        <div class="role">Joint Secretary</div>
+      </div>
+      <div class="member">
+        <img src="joint2.jpg" alt="Joint Secretary">
+        <div class="name">Mr. Rahul Mishra</div>
+        <div class="role">Joint Secretary</div>
+      </div>
+      <div class="member">
+        <img src="joint3.jpg" alt="Joint Secretary">
+        <div class="name">Ms. Monika Kumari</div>
+        <div class="role">Joint Secretary</div>
+      </div>
+    </div>
+
+    <!-- Coordinators -->
+    <div class="row">
+      <div class="member">
+        <img src="coord1.jpg" alt="Coordinator">
+        <div class="name">Mr. Amit K. Choudhary</div>
+        <div class="role">Coordinator<br>(Outdoor Events)</div>
+      </div>
+      <div class="member">
+        <img src="coord2.jpg" alt="Coordinator">
+        <div class="name">Mr. Lokesh Kumar</div>
+        <div class="role">Coordinator<br>(Indoor, Fest)</div>
+      </div>
+      <div class="member">
+        <img src="coord3.jpg" alt="Coordinator">
+        <div class="name">Mr. Himanshu Pandey</div>
+        <div class="role">Coordinator<br>(Utilities, Gym, Yoga)</div>
+      </div>
+    </div>
+
+    <!-- Secretaries -->
+    <div class="row">
+      <div class="member">
+        <img src="sec1.jpg" alt="Secretary">
+        <div class="name">Mr. Rahul</div>
+        <div class="role">Football</div>
+      </div>
+      <div class="member">
+        <img src="sec2.jpg" alt="Secretary">
+        <div class="name">Mr. Vijay Sharma</div>
+        <div class="role">Cricket</div>
+      </div>
+      <div class="member">
+        <img src="sec3.jpg" alt="Secretary">
+        <div class="name">Ms. Sneha</div>
+        <div class="role">Basketball</div>
+      </div>
+      <div class="member">
+        <img src="sec4.jpg" alt="Secretary">
+        <div class="name">Mr. Ankit</div>
+        <div class="role">Volleyball</div>
+      </div>
+    </div>
+
+    <!-- More Secretaries -->
+    <div class="row">
+      <div class="member">
+        <img src="sec5.jpg" alt="Secretary">
+        <div class="name">Ms. Nisha</div>
+        <div class="role">Badminton</div>
+      </div>
+      <div class="member">
+        <img src="sec6.jpg" alt="Secretary">
+        <div class="name">Mr. Raj</div>
+        <div class="role">Table Tennis</div>
+      </div>
+      <div class="member">
+        <img src="sec7.jpg" alt="Secretary">
+        <div class="name">Ms. Aditi</div>
+        <div class="role">Chess</div>
+      </div>
+    </div>
+
   </div>
+</section>
 
-</footer>
+<script>
+// Automatic scrolling for sports carousel
+const track = document.querySelector('.sports-track');
+let scrollAmount = 0;
+const speed = 2.5; // pixels per frame, adjust speed here
+function animateScroll() {
+  scrollAmount += speed;
+  if(scrollAmount >= track.scrollWidth/2) scrollAmount = 0; // loop
+  track.style.transform = `translateX(-${scrollAmount}px)`;
+  requestAnimationFrame(animateScroll);
+}
+window.addEventListener('load', animateScroll);
+
+// Back to Top Button
+const topBtn = document.createElement('button');
+topBtn.id = 'topBtn'; topBtn.innerText = '↑ Top';
+document.body.appendChild(topBtn);
+topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+window.addEventListener('scroll', ()=>{
+  if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) topBtn.style.display='block';
+  else topBtn.style.display='none';
+});
+</script>
+
 </body>
 </html>
